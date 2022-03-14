@@ -10,7 +10,7 @@ const db = require('../models')
 //const places = require('../models/places')
 
 
-// index route
+// index route list of places
 router.get('/', (req, res) => {
 
     db.Place.find()
@@ -63,18 +63,21 @@ router.get('/:id', (req, res) => {
 
 
 
-
+// update a place
 router.put('/:id', (req, res) => {
     res.send('PUT /places/:id stub')
 })
 
+// delete
 router.delete('/:id', (req, res) => {
     res.send('DELETE /places/:id stub')
 })
 
+// go to edit page
 router.get('/:id/edit', (req, res) => {
     res.send('GET edit form stub')
 })
+
 
 router.post('/:id/rant', (req, res) => {
     res.send('GET /places/:id/rant stub')
