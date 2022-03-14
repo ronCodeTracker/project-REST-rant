@@ -81,8 +81,42 @@ router.get('/:id/edit', (req, res) => {
 })
 
 
+
+router.get('/:id/rant', (req, res) => {
+    db.Place.findById(req.params.id)
+        .then(place => {
+            res.render('places/newcomment', {place})
+        })
+})
+
 router.post('/:id/rant', (req, res) => {
-    res.send('GET /places/:id/rant stub')
+    console.log(req.body)
+    if (req.body.rant) {
+        req.body.rant = true
+    }
+    else {
+        req.body.rant = false
+    }
+    db.Place.findById(req.params.id)
+        .then(place => {
+            // Todo: Create comment
+            db.Comment.create(req.body)
+                .then(comment => {
+                    // Todo: Save comment id to place
+                    place.comments.push(comment.id)
+                    place.save()
+                        .then(() => {
+                            res.redirect(`/places/${req.params.id}`)
+                        })
+                })
+                .catch(err => {
+                    res.render('error404')
+                })
+        })
+        .catch(err => {
+            res.render('error404')
+        })
+    
 })
 
 router.delete('/:id/rant/:rantId', (req, res) => {

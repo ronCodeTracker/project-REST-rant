@@ -61,6 +61,9 @@ function show(data) {
                         Delete
                     </button>
                 </form>
+                <div>
+                    <a href={`/places/${data.place.id}/rant`}>Add new comment</a>
+                </div>
 
           </main>
         </Def>
