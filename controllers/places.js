@@ -67,17 +67,37 @@ router.get('/:id', (req, res) => {
 
 // update a place
 router.put('/:id', (req, res) => {
-    res.send('PUT /places/:id stub')
+    db.Place.findByIdAndUpdate(req.params.id, req.body)
+        .then(() => {
+            res.redirect(`/places/${req.params.id}`)
+        })
+        .catch(err => {
+            console.log('err', err)
+            res.render('error404')
+        })
 })
 
 // delete
 router.delete('/:id', (req, res) => {
-    res.send('DELETE /places/:id stub')
+    db.Place.findByIdAndDelete(req.params.id)
+        .then(place => {
+            res.redirect('/places')
+        })
+        .catch(err => {
+            console.log('err', err)
+            res.render('error404')
+        })
 })
 
 // go to edit page
 router.get('/:id/edit', (req, res) => {
-    res.send('GET edit form stub')
+    db.Place.findById(req.params.id)
+        .then(place => {
+            res.render('places/edit', { place })
+        })
+        .catch(err => {
+            res.render('error404')
+        })
 })
 
 
@@ -120,7 +140,27 @@ router.post('/:id/rant', (req, res) => {
 })
 
 router.delete('/:id/rant/:rantId', (req, res) => {
-    res.send('GET /places/:id/rant/:rantId stub')
+    console.log('reqparamsrandid' + req.params.rantId)
+    db.Comment.findByIdAndDelete(req.params.rantId)
+        .then(() => {
+            console.log('Success')
+            res.redirect(`/places/${req.params.id}`)
+        })
+        .catch(err => {
+            console.log('err', err)
+            res.render('error404')
+        })
+    /*
+    db.Place.findById(req.params.id)
+        .then(place => {
+            console.log('place' + place)
+            res.render('places/show')
+        })
+        .catch(err => {
+            console.log('err' + err)
+            res.render('error404')
+        })  */
+    //res.send('here')
 })
 
 module.exports = router

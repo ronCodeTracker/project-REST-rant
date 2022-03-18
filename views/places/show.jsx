@@ -26,10 +26,14 @@ function show(data) {
         let sumRatings = data.place.comments.reduce((tot, c) => {
             return tot + c.stars
         }, 0)
-        let averageRating = sumRatings / data.place.comments.length
+        let averageRating = Math.round(sumRatings / data.place.comments.length)
+        let stars = ''
+        for (let i = 0; i < averageRating; i++) {
+            stars += '⭐️'
+        }
         rating = (
             <h3>
-                {Math.round(averageRating)} stars
+                {stars} stars
             </h3>
         )
 
@@ -43,6 +47,10 @@ function show(data) {
                         <stong>- {c.author}</stong>
                     </h3>
                     <h4>Rating: {c.stars}</h4>
+                    <h5>Console: {c.id}</h5>
+                    <form method="POST" action={`/places/${data.place.id}/rant/${c.id}?_method=DELETE`}>
+                        <input type="submit" className="btn btn-danger" value="Delete Comment" />
+                    </form>
                 </div>
             )
         })
@@ -75,17 +83,19 @@ function show(data) {
                     Serving {data.place.cuisines}
                 </h4>
 
-                <a href={`/places/${data.id}/edit`} className="btn btn-warning space2">
+                <a href={`/places/${data.place.id}/edit`} className="btn btn-warning space2">
                     Edit
                 </a>
-                <form method="POST" action={`/places/${data.id}?_method=DELETE`}>
+                <form method="POST" action={`/places/${data.place.id}?_method=DELETE`}>
                     <button type="submit" className="btn btn-danger space2">
                         Delete
                     </button>
                 </form>
+                
                 <div>
                     <a href={`/places/${data.place.id}/rant`}>Add new comment</a>
                 </div>
+                
 
           </main>
         </Def>
