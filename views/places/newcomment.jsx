@@ -1,7 +1,4 @@
 
-
-
-
 const React = require('react')
 const Def = require('../default')
 
@@ -48,10 +45,4 @@ function comment_form({place}) {
 }
 
 module.exports = comment_form
-
-
-
-
-
-
 

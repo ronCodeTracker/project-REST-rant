@@ -42,8 +42,6 @@ router.post('/', (req, res) => {
 })
 
 
-
-
 router.get('/new', (req, res) => {
     res.render('places/new')
 })
@@ -62,8 +60,6 @@ router.get('/:id', (req, res) => {
             res.render('error404')
         })
 })
-
-
 
 // update a place
 router.put('/:id', (req, res) => {

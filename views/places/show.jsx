@@ -1,7 +1,4 @@
 ﻿
-
-
-
 const React = require('react')
 const Def = require('../default')
 
@@ -17,7 +14,6 @@ function show(data) {
             Not yet rated
         </h3>
     )
-
 
 
     if (data.place.comments.length) {

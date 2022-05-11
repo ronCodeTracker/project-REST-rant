@@ -1,7 +1,5 @@
 
 
-
-
 const React = require('react')
 const Def = require('../default.jsx')
 
@@ -54,7 +52,5 @@ function edit_form({ place }) {
 }
 
 module.exports = edit_form
-
-
 
 

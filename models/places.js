@@ -1,7 +1,4 @@
 
-
-
-
 const mongoose = require('mongoose')
 
 const placeSchema = new mongoose.Schema({
@@ -26,6 +23,4 @@ placeSchema.methods.showEstablished = function () {
 
 
 module.exports = mongoose.model('Place', placeSchema)
-
-
 
